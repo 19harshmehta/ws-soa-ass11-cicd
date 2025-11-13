@@ -18,14 +18,12 @@ jobs:
           node-version: 18
 
       - name: Install dependencies
-        run: |
-          cd backend
-          npm ci || npm install
+        working-directory: ./backend
+        run: npm ci || npm install
 
       - name: Run tests
-        run: |
-          cd backend
-          npm test
+        working-directory: ./backend
+        run: npm test
 
   build-and-push:
     needs: build-test
@@ -50,4 +48,3 @@ jobs:
         if: ${{ secrets.DOCKER_USERNAME != '' && secrets.DOCKER_PASSWORD != '' }}
         run: |
           docker push ${{ secrets.DOCKER_USERNAME }}/wasteless-backend:${{ github.sha }}
-  
