@@ -1,0 +1,27 @@
+{
+  "id": null,
+  "uid": "wasteless-dashboard",
+  "title": "Wasteless Backend Metrics",
+  "timezone": "browser",
+  "panels": [
+    {
+      "type": "graph",
+      "title": "HTTP request duration (seconds)",
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
+      "targets": [
+        {
+          "expr": "histogram_quantile(0.95, sum(rate(http_request_duration_seconds_bucket[1m])) by (le))",
+          "legendFormat": "p95",
+          "refId": "A"
+        }
+      ]
+    }
+  ],
+  "schemaVersion": 36,
+  "version": 1
+}
